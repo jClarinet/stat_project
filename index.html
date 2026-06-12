@@ -2,21 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>app name</title>
-    
+    <title>Statistics Farm</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
     <div class="app">
-        <div class="title">Juniper's Calendar</div>
-      <div id="calendar">
-        <div id="day"></div>
-        <div id="month"></div>
-      </div>
+        <div id="app-title" class="title">Statistics Farm</div>
+        <button id="start-button"> Start </button>
+        
+        <div class="game-container" id="game-container">
+            <div class="left-column">
+                <div id="speech-bubble">Quack! Welcome to the statistics farm!</div>
+                <img id="duck-img" src="assets/duck1.png" alt="Duck">
+                <div id="instruction-bubble">Let's order the steps for a simple random sample!</div>
+                <button id="continue-button"> Continue </button>
+            </div>
+            
+            <div class="right-column">
+                <div id="sorting-box">
+                    <!-- Added draggable="true" to allow native dragging mechanics -->
+                    <div class="sortable-item" draggable="true" data-step="1">
+                        <span>Label the 9 plants with unique numbers from 1 to 9.</span>
+                    </div>
+                    <div class="sortable-item" draggable="true" data-step="2">
+                        <span>Write numbers 1 to 9 on identical slips of paper and place them in a hat.</span>
+                    </div>
+                    <div class="sortable-item" draggable="true" data-step="3">
+                        <span>Mix the slips thoroughly to ensure equal probability of selection.</span>
+                    </div>
+                    <div class="sortable-item" draggable="true" data-step="4">
+                        <span>Select 4 slips one at a time, without replacement, to form your sample.</span>
+                    </div>
+                </div>
+                <button id="check-button">Check Order</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

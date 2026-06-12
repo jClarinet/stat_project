@@ -1,20 +1,26 @@
 const { app, BrowserWindow } = require("electron");
+const path = require("path"); // Node helper for file paths
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 214,
-    height: 228,
+    width: Math.round(1944 / 4),
+    height: Math.round(1104 / 4),
     resizable: false,
     maximizable: false,
     fullscreenable: false,
     frame: false, 
     transparent: true,
     webPreferences: {
-      contextIsolation: true
+      contextIsolation: true, // Keep security context active
+      nodeIntegration: false,  // Best practice safety fallback
+      preload: path.join(__dirname, "preload.js") // Points to your new preload file
     }
   });
 
   win.loadFile("index.html");
+  
+  // Forces Electron's console window to open immediately on execution
+  win.webContents.openDevTools({ mode: 'detach' });
 }
 
 app.whenReady().then(createWindow);

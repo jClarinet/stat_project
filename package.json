@@ -9,6 +9,7 @@
     "electron": "^38.8.6"
   },
   "dependencies": {
-    "@fontsource/pixelify-sans": "^5.2.7"
+    "@fontsource/pixelify-sans": "^5.2.7",
+    "sortablejs": "^1.15.7"
   }
 }

@@ -1,33 +1,41 @@
 * {
     box-sizing: border-box;
   }
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }  
+  @font-face {
+    font-family: 'Pixelify Sans';
+    src: url('assets/PixelifySans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
   
   
   body {
     margin: 0;
-    width: 100vw;
-    height: 100vh;
     font-family: "Pixelify Sans", sans-serif;
-    
     user-select: none;
     -webkit-app-region: drag;
     background-image: url("assets/outer-frame-bg.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-
   }
   
   .app {
+    height: 100vh; /* Fixed height instead of min-height */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevents scrollbars if content overflows */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    width: 13.375rem;
     padding: 1rem 1.0625rem;
-
-    background-image: url("assets/outer-frame-bg.png");
+    background-image: url("assets/farm.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -41,7 +49,7 @@
     -webkit-app-region: no-drag;
     cursor: pointer;
   }
-
+  
   .title {
     display: flex;
     width: 157px;
@@ -52,39 +60,51 @@
     border-radius: 0.625rem;
     border: 1px solid #C079FF;
     background: rgba(210, 164, 255, 0, 0.40);
-
     color: var(--white, #FFF);
-
     font-family: "Pixelify Sans";
     font-size: 0.8rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-
-    
-    
   }
-  #calendar { 
-    display: flex;
-    width: 11.25rem;
-    height: 10.0625rem;
-    flex-direction: column;
+  
+  #start-button{
+    width: 150px;
+    height: 50px;
+    border: 1px solid #C079FF;
+    border-radius: 10px;
+    background: rgba(210, 164, 255, 0.7);
+    color: white;
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  #continue-button {
+    width: 75px;
+    height: 25px;
+    border: 1px solid #C079FF;
+    border-radius: 10px;
+    background: rgba(210, 164, 255, 0.7);
+    color: white;
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    margin-top:5px;
     justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    font-family: "Pixelify Sans";
-    background-image: url("assets/inner-frame-bg.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    }
+    align-self: center;   
 
+  }
+
+  
+  #start-button:hover, #continue-button:hover {
+    transform: scale(1.05);
+  }
+  
   #day {
     color: #FFF;
     text-align: center;
     -webkit-text-stroke-width: 1.5px;
     -webkit-text-stroke-color: var(--mid-purple, #B58CD9);
-    font-family: Pixeboy;
     font-size: 8.5rem;
     font-style: normal;
     font-weight: 400;
@@ -96,15 +116,13 @@
     height: 4.4375rem;
     flex-direction: column;
     justify-content: center;
-
-}
-#month {
-    
+  }
+  
+  #month {
     color: #FFF;
     text-align: center;
     -webkit-text-stroke-width: 1.5px;
     -webkit-text-stroke-color: #B58CD9;
-    font-family: Pixeboy;
     font-size: 2rem;
     font-style: normal;
     font-weight: 400;
@@ -112,5 +130,169 @@
     letter-spacing: 0.3rem;
     font-family: "Pixelify Sans";
     width: 8.125rem;
+  }
+  
+  /* --- GAME SCREEN ELEMENT LAYOUT --- */
+  
+  /* This container hides EVERYTHING inside it on load */
+  .game-container {
+    display: none; 
+    flex-direction: row;
+    align-items: flex-start; 
+    width: 100%; 
+    max-width: 950px;           /* Increased from 800px to allow more expansion space */
+    margin: 0 auto;             /* Centers the entire container on the screen */
+    padding: 0 20px; 
+    gap: 30px;                  /* Slightly wider gap between the duck side and the boxes */
+  }
+  .left-column {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;   
+    flex: 1;                    /* Keeps the duck column at base width ratio */
+  }
+  
+  .right-column {
+    display: flex;
+    flex-direction: column;    
+    flex: 1.5;                  /* INCREASED: Makes the right column 50% wider than the left */
+  }
 
+  
+  #speech-bubble {
+    background-image: url('assets/inner-frame-bg.png');
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 15px 15px; 
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 12px;
+    color: #000000; 
+    margin-bottom: 15px; 
+    width: 175px; 
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    align-self: center;
+  }
+  
+  #duck-img {
+    width: 100px;
+    height: auto;
+    align-self: center;
+  }
+  #sorting-box {
+    background-image: url('assets/outer-frame-bg.png');
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 10px 10px;         
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 14px;            
+    color: #000000; 
+    margin-bottom: 15px; 
+    box-sizing: border-box;
+    opacity: 0.8;
+    width: 100%;                
+    min-height: 100px;          
+    
+    /* NEW: Turns sorting box into a vertical list layout */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;                  /* Consistent pixel spacing between rectangles */
+    justify-content: flex-start;/* Aligns sortable list elements starting from top */
+  }
+  
+  .sortable-item {
+    display: flex;
+    align-items: center;        /* Centers text vertically inside rectangle */
+    width: 100%;                /* Stretches rectangle horizontally to fit box */
+    min-height: 30px;           /* Base vertical thickness for each rectangle */
+    padding: 4px 5px;         /* Breathing room inside the text boxes */
+    background: rgba(255, 255, 255, 0.85); /* Slightly transparent light fill */
+    border: 2px solid #C079FF;  /* Matches your purple interface palette */
+    border-radius: 6px;         /* Smooth soft corners for pixel layout */
+    color: #333;                /* Dark legible text color */
+    font-size: 8px;
+    cursor: grab;               /* Visual indicator that item can be dragged */
+    
+  }
+
+  /* Hover feedback */
+  .sortable-item:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-1px); /* Slight lift on hover */
+  }
+  
+  /* Click feedback */
+  .sortable-item:active {
+    cursor: grabbing;           /* Visual state change while sorting */
+    background: rgba(210, 164, 255, 0.3); /* Purple tint shift while dragging */
+  }
+  
+  /* Optional styling state for drag-and-drop placeholder utility */
+  .sortable-item.dragging {
+    opacity: 0.4;
+    border-style: dashed !important;
+    background: rgba(210, 164, 255, 0.2) !important;
+  }
+  
+
+  #instruction-bubble {
+    background-image: url('assets/inner-frame-bg.png');
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 15px 15px; 
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 12px;
+    color: #000000; 
+    margin-top: 8px;           /* Adds space directly beneath the duck image */
+    margin-bottom: 5px;        /* Matches the bottom spacing for the continue button */
+    width: 175px; 
+    box-sizing: border-box;
+    align-self: center;         
+  }
+  /* --- VERIFICATION & BUTTON STYLES --- */
+  #check-button {
+    width: 150px;
+    height: 40px;
+    margin: 5px auto 0 auto;    /* Pushes button down and aligns center horizontal */
+    border: 1px solid #C079FF;
+    border-radius: 10px;
+    background: rgba(210, 164, 255, 0.9);
+    color: white;
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    align-self: center;         /* Critical for aligning cleanly inside right column flex wrapper */
+  }
+  
+  #check-button:hover {
+    transform: scale(1.03);
+  }
+  
+  .sortable-item.correct {
+    background: rgba(144, 238, 144, 0.85) !important;
+    border-color: #2e7d32 !important;
+    color: #1b5e20;
+  }
+  
+  .sortable-item.incorrect {
+    background: rgba(255, 182, 193, 0.85) !important;
+    border-color: #c62828 !important;
+    color: #b71c1c;
+  }
+  .game-container,
+.left-column,
+.right-column,
+#sorting-box,
+.sortable-item,
+.sortable-item span {
+    -webkit-app-region: no-drag;
 }
+
+.sortable-item span {
+    pointer-events: none;
+}
+  
