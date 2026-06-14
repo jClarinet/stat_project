@@ -167,6 +167,7 @@ if (checkButton) {
             }
 
             checkButton.style.display = "none";
+            if (instructionBubble) instructionBubble.style.display = "none";
 
             document.querySelectorAll(".sortable-item").forEach(item => {
                 item.setAttribute("draggable", "false");
