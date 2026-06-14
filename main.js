@@ -3,8 +3,8 @@ const path = require("path"); // Node helper for file paths
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: Math.round(1944 / 4),
-    height: Math.round(1104 / 4),
+    width: 500,
+    height: 350,
     resizable: false,
     maximizable: false,
     fullscreenable: false,

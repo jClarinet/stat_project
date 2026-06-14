@@ -4,4 +4,4 @@ Background image was taken from here: https://www.google.com/url?sa=t&source=web
 The duck image was found on google here: https://dinopixel.com/witch-duck-pixel-art-23450
 
 Project was created with nodo.js, electron, homebrew
-Coding was mostly done through the tutorial above and google gemini +chatgpt
+Coding was mostly done through the tutorial above 
