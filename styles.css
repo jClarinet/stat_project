@@ -516,7 +516,7 @@
 /* Allow scrolling when activities get tall */
 .app {
     overflow-y: auto !important;
-    overflow-x: hidden !important;
+    overflow-x: auto !important;
     justify-content: flex-start !important;
 }
 
